@@ -475,7 +475,7 @@
         <div class="popup-card" style="background: #fff0f5;">
             <h2>💋 butterfly kiss 💋</h2>
             <div class="popup-message" style="font-size: clamp(1.6rem, 5vw, 2.2rem);">
-                A thousand butterfly kisses<br>for my beautiful Bhausha.<br>You make my heart flutter.
+                A thousand butterfly kisses<br>for my beautiful girl.<br>You make my heart flutter.
             </div>
             <div style="font-size: 3rem;">🦋💕🦋</div>
             <button class="close-popup" id="closeKissPopup">💖 close 💖</button>
@@ -662,7 +662,7 @@
                 setTimeout(typeWriter, 700);
             });
 
-            // ------------------- 3-CLICK PRANK + CAROUSEL + SOULFUL MUSIC --------------------
+            // ------------------- 3-CLICK PRANK + CAROUSEL + SOULFUL MUSIC WITH AUDIO MANAGEMENT --------------------
             let clickCount = 0;
             const surpriseBtn = document.getElementById('surpriseBtn');
             const popup = document.getElementById('popupOverlay');
@@ -676,15 +676,23 @@
             
             const soulfulAudio = document.getElementById('soulfulMusic');
             soulfulAudio.volume = 0.4;
+            
+            const bgAudio = document.getElementById('bgMusic');
+            
+            // Variables to store audio states for main popup
+            let mainPopupBgWasPlaying = false;
+            let mainPopupWaveWasPlaying = false;
+            const waveAudio = document.getElementById('waveSound');
 
             // Romantic images from assets/images/
             const images = [
-				{ src: 'Assets/images/Img1.jpg', caption: 'flowers for you' },
-                { src: 'Assets/images/Img2.jpg', caption: 'eternal love' },
-                { src: 'Assets/images/Img3.jpg', caption: 'magical moments' },
-                { src: 'Assets/images/Img4.jpg', caption: 'together' },
-                { src: 'Assets/images/Img5.jpg', caption: 'paradise' },
-                { src: 'Assets/images/Img1.jpg', caption: 'magical moments' }
+{ src: 'Assets/images/Img1.jpg', caption: 'Love' },
+{ src: 'Assets/images/Img2.jpg', caption: 'Forever' },
+{ src: 'Assets/images/Img3.jpg', caption: 'Us' },
+{ src: 'Assets/images/Img4.jpg', caption: 'Together' },
+{ src: 'Assets/images/Img5.jpg', caption: 'Always' },
+{ src: 'Assets/images/Img6.jpg', caption: 'Perfect' }
+
             ];
 
             let currentIndex = 0;
@@ -736,6 +744,7 @@
                 clickCount++;
                 if (clickCount === 1) {
                     showPopup('😄 gotcha!', 'You clicked for a kiss... but I gave you a fish! 🐠', false);
+                    // Pause soulful if playing
                     soulfulAudio.pause();
                     soulfulAudio.currentTime = 0;
                 } else if (clickCount === 2) {
@@ -743,17 +752,36 @@
                     soulfulAudio.pause();
                     soulfulAudio.currentTime = 0;
                 } else if (clickCount === 3) {
-                    showPopup('For my butterfly ', 'Bhausha, you are the most magical part of my life. I love you endlessly.', true, true);
+                    // Store states before pausing
+                    mainPopupBgWasPlaying = !bgAudio.paused;
+                    mainPopupWaveWasPlaying = !waveAudio.paused;
+                    
+                    // Pause any playing audio
+                    if (!bgAudio.paused) bgAudio.pause();
+                    if (!waveAudio.paused) waveAudio.pause();
+                    
+                    showPopup('For my butterfly', 'Bhausha, you are the most magical part of my life. I love you endlessly.', true, true);
                     soulfulAudio.play().catch(e => console.log('soulful audio play prevented'));
                     clickCount = 0;
                 }
             });
+
+            // Function to resume audio after main popup closes
+            function resumeMainPopupAudio() {
+                if (mainPopupBgWasPlaying) {
+                    bgAudio.play().catch(e => {});
+                }
+                if (mainPopupWaveWasPlaying) {
+                    waveAudio.play().catch(e => {});
+                }
+            }
 
             closePopup.addEventListener('click', function() {
                 popup.classList.remove('show');
                 stopCarousel();
                 soulfulAudio.pause();
                 soulfulAudio.currentTime = 0;
+                resumeMainPopupAudio();
             });
 
             popup.addEventListener('click', function(e) {
@@ -762,6 +790,7 @@
                     stopCarousel();
                     soulfulAudio.pause();
                     soulfulAudio.currentTime = 0;
+                    resumeMainPopupAudio();
                 }
             });
 
@@ -770,8 +799,6 @@
             const nameTrigger = document.getElementById('nameTrigger');
             const beachPopup = document.getElementById('beachPopup');
             const closeBeach = document.getElementById('closeBeachPopup');
-            const waveAudio = document.getElementById('waveSound');
-            const bgAudio = document.getElementById('bgMusic');
             
             waveAudio.volume = 0.2;
             
