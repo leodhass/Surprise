@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Bhausha · butterfly of my heart</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 30% 40%, #ffccd5, #ffb1c1 45%, #ff7b9c 100%);
+            background-attachment: fixed;
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 16px;
+        }
+
+        /* floating canvas for hearts and butterflies */
+        #float-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* main card */
+        .valentine-card {
+            position: relative;
+            z-index: 15;
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 240, 248, 0.25);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 80px 30px 80px 30px;
+            box-shadow: 0 45px 80px rgba(150, 30, 70, 0.4), 0 0 0 4px rgba(255, 240, 250, 0.8) inset, 0 0 60px #ffb3c6;
+            padding: 40px 25px 50px 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+
+        .elegant {
+            font-family: 'Great Vibes', cursive;
+            color: #681d39;
+            text-shadow: 4px 4px 15px #ffd0dc, 0 0 30px #ffffff;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: clamp(3.5rem, 14vw, 5.5rem);
+            margin-bottom: 5px;
+            line-height: 1.1;
+            color: #991f47;
+            filter: drop-shadow(0 8px 16px #ff9eb8);
+        }
+
+        .sub {
+            font-family: 'Parisienne', cursive;
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            color: #b32150;
+            opacity: 0.98;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 6px 25px;
+            border-radius: 60px;
+            display: inline-block;
+            backdrop-filter: blur(6px);
+            border: 2px solid white;
+            box-shadow: 0 5px 15px #ffb8c9;
+        }
+
+        /* typewriter container */
+        .typewriter-container {
+            min-height: 150px;
+            margin: 20px 5px 20px 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .typewriter-message {
+            font-family: 'Parisienne', cursive;
+            font-size: clamp(1.9rem, 6vw, 2.8rem);
+            font-weight: 500;
+            color: #3b1020;
+            background: rgba(255, 240, 250, 0.5);
+            padding: 22px 25px;
+            border-radius: 90px 25px 90px 25px;
+            line-height: 1.4;
+            max-width: 800px;
+            box-shadow: 0 20px 35px rgba(180, 60, 90, 0.3), 0 0 0 4px #ffeef4;
+            backdrop-filter: blur(6px);
+            white-space: pre-wrap;
+            word-break: break-word;
+            text-shadow: 2px 2px 10px #ffdae7;
+            border: 2px solid white;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 5px;
+            margin-left: 5px;
+            background-color: #b31b4b;
+            animation: blink 0.9s infinite;
+            border-radius: 5px;
+            height: 0.9em;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* surprise button */
+        .surprise-btn {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 3px solid white;
+            padding: 16px 50px;
+            border-radius: 70px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: #711c3d;
+            text-shadow: 0 3px 10px #ffc0d0, 0 0 20px white;
+            cursor: pointer;
+            transition: 0.2s ease;
+            margin: 15px 0 15px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 20px 30px -5px #a53860, 0 4px 0 0 #751f3b;
+            transform: translateY(0);
+        }
+
+        .surprise-btn:hover {
+            transform: scale(1.02) translateY(-3px);
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 25px 35px -5px #b3406b, 0 6px 0 0 #751f3b;
+        }
+
+        .surprise-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 15px 20px -5px #a53860, 0 2px 0 0 #751f3b;
+        }
+
+        /* signature with clickable name */
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #741f40;
+            margin-top: 20px;
+            opacity: 0.95;
+            text-align: right;
+            padding-right: 20px;
+            text-shadow: 0 0 20px white;
+        }
+        .signature .clickable-name {
+            cursor: pointer;
+            border-bottom: 2px dashed #ff88aa;
+            transition: 0.2s;
+        }
+        .signature .clickable-name:hover {
+            color: #a52a55;
+            border-bottom: 2px solid #ffb0c0;
+        }
+
+        /* popup overlay base */
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.4s ease, visibility 0.4s;
+            padding: 20px;
+        }
+
+        .popup-card {
+            background: linear-gradient(145deg, #fff6f9, #ffdde8);
+            max-width: 850px;
+            width: 95%;
+            padding: 30px 20px;
+            border-radius: 100px 20px 100px 20px;
+            box-shadow: 0 50px 80px #8f3857, 0 0 0 10px #ffc0d0, 0 0 60px #ff99b5;
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 6px solid white;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .popup-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup-overlay.show .popup-card {
+            transform: scale(1);
+        }
+
+        .popup-card h2 {
+            font-size: 3rem;
+            color: #a1244b;
+            margin-bottom: 10px;
+            text-shadow: 4px 4px 0 #ffccda;
+        }
+
+        .popup-message {
+            font-size: 2.2rem;
+            line-height: 1.4;
+            color: #641c38;
+            margin: 10px 0 15px;
+            font-family: 'Parisienne', cursive;
+        }
+
+        .butterfly-symbol {
+            display: inline-block;
+            font-size: 3.2rem;
+            animation: floatButterfly 3s infinite ease-in-out;
+            filter: drop-shadow(0 8px 12px #ff7c9e);
+            margin: 0 5px;
+        }
+        @keyframes floatButterfly {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(4deg); }
+            50% { transform: translateY(4px) rotate(-4deg) scale(1.05); }
+            75% { transform: translateY(-4px) rotate(2deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* lovely framed carousel */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 15px auto;
+            border-radius: 40px 15px 40px 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 0 6px #ffb6c9, 0 20px 30px #b34d71;
+            border: 2px solid white;
+        }
+
+        .carousel-frame {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 30px 10px 30px 10px;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .carousel-slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.8s ease;
+            border-radius: 30px 10px 30px 10px;
+            border: 3px solid white;
+        }
+
+        .carousel-caption {
+            font-family: 'Quicksand', sans-serif;
+            margin-top: 8px;
+            font-size: 1.1rem;
+            color: #90284b;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .close-popup {
+            background: #ff8da9;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            padding: 12px 40px;
+            border-radius: 60px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 6px 0 #b63b62;
+            cursor: pointer;
+            transition: 0.1s ease;
+            border: 3px solid white;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+
+        .close-popup:active {
+            transform: translateY(6px);
+            box-shadow: 0 1px 0 #b63b62;
+        }
+
+        @media (max-width: 600px) {
+            .valentine-card {
+                padding: 30px 15px 40px 15px;
+            }
+            .typewriter-message {
+                padding: 18px 18px;
+                font-size: 2rem;
+            }
+            .surprise-btn {
+                font-size: 2rem;
+                padding: 14px 35px;
+            }
+            .popup-card h2 {
+                font-size: 2.5rem;
+            }
+            .popup-message {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* audio widgets */
+        #romantic-audio {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            opacity: 0.5;
+            z-index: 200;
+            border-radius: 50%;
+            background: #ffb8c9;
+            border: 3px solid white;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 0 20px #ff98b0;
+        }
+        #romantic-audio:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        audio {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+        .audio-note {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background: rgba(255, 230, 240, 0.8);
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 40px;
+            color: #741f3a;
+            backdrop-filter: blur(4px);
+            z-index: 210;
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="float-canvas"></canvas>
+
+    <div class="valentine-card">
+        <h1 class="elegant">Bhausha</h1>
+        <div class="sub">my beautiful butterfly</div>
+
+        <div class="typewriter-container">
+            <div id="typewriter-text" class="typewriter-message"></div>
+        </div>
+
+        <!-- surprise button (3-click prank) -->
+        <button class="surprise-btn" id="surpriseBtn">🦋 Open when you miss me</button>
+
+        <!-- signature with clickable name (beach surprise after 3 clicks) -->
+        <div class="signature">
+            yours always, <span class="clickable-name" id="nameTrigger">[Your Name]</span>
+        </div>
+    </div>
+
+    <!-- main surprise popup (pranks & real with carousel) -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-card" id="popupCard">
+            <h2 id="popupTitle">✨ surprise! ✨</h2>
+            <div class="popup-message" id="popupMessage"></div>
+            <div id="butterflyContainer" style="margin:10px 0;"></div>
+            
+            <!-- lovely framed carousel (hidden by default) -->
+            <div id="carouselWrapper" style="display: none;" class="carousel-container">
+                <div class="carousel-frame">
+                    <img id="carouselImage" class="carousel-slide" src="" alt="romantic moment">
+                </div>
+                <div class="carousel-caption" id="carouselCaption">our beautiful moments</div>
+            </div>
+
+            <button class="close-popup" id="closePopup">💖 close 💖</button>
+        </div>
+    </div>
+
+    <!-- beach popup with wave sound -->
+    <div class="popup-overlay" id="beachPopup">
+        <div class="popup-card" style="background: #ffeef2;">
+            <h2>🏖️ tonight's secret 🏖️</h2>
+            <div class="popup-message" style="font-size: 2.2rem;">
+                Get ready my love, we're going to the beach!<br>
+                🌙🌊 Under the stars, just you and me.<br>
+                I can't wait to hold your hand by the shore.
+            </div>
+            <div style="font-size: 3.5rem; margin: 10px 0;">🌴🐚🌅</div>
+            <button class="close-popup" id="closeBeachPopup">💖 close 💖</button>
+        </div>
+    </div>
+
+    <!-- background music (general romantic) - local file -->
+    <div class="audio-note">🎵 romantic melody</div>
+    <div id="romantic-audio" title="play/pause background music">
+        <audio id="bgMusic" loop autoplay>
+            <source src="assets/audio/romantic-bg.mp3" type="audio/mpeg">
+            <!-- fallback in case file missing -->
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- soulful music for 3rd surprise - local file -->
+    <audio id="soulfulMusic" loop preload="auto">
+        <source src="assets/audio/soulful.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- beach wave sound effect - local file -->
+    <audio id="waveSound" loop preload="auto">
+        <source src="assets/audio/waves.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        (function() {
+            // ------------------- FLOATING HEARTS & BUTTERFLIES --------------------
+            const canvas = document.getElementById('float-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let elements = [];
+
+            function initCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            function createElements(count) {
+                for (let i = 0; i < count; i++) {
+                    if (i % 3 === 0) {
+                        elements.push({
+                            type: 'butterfly',
+                            x: Math.random() * width,
+                            y: Math.random() * height,
+                            size: random(18, 42),
+                            speedY: random(0.15, 0.7),
+                            speedX: random(-0.15, 0.15),
+                            opacity: random(0.5, 0.95),
+                            color1: `rgba(255, 170, 200, ${random(0.6,0.9)})`,
+                            color2: `rgba(240, 130, 180, ${random(0.6,0.9)})`,
+                            angle: random(0, Math.PI*2),
+                            flutter: random(0.02, 0.05)
+                        });
+                    } else {
+                        elements.push({
+                            type: 'heart',
+                            x: Math.random() * width,
+                            y: Math.random() * height,
+                            size: random(14, 38),
+                            speedY: random(0.2, 0.9),
+                            speedX: random(-0.1, 0.1),
+                            opacity: random(0.4, 0.9),
+                            color: `rgba(255, 100, 140, `,
+                            pulse: random(0.5, 1.5)
+                        });
+                    }
+                }
+            }
+
+            function initElements() {
+                elements = [];
+                createElements(36);
+            }
+
+            function drawElements() {
+                ctx.clearRect(0, 0, width, height);
+                for (let i = 0; i < elements.length; i++) {
+                    let e = elements[i];
+                    e.y -= e.speedY * 0.4;
+                    e.x += Math.sin(Date.now() * 0.002 + i) * 0.08;
+
+                    if (e.y < -60) {
+                        e.y = height + 40;
+                        e.x = Math.random() * width;
+                    }
+
+                    if (e.type === 'heart') {
+                        let pulseSize = e.size * (0.9 + 0.15 * Math.sin(Date.now() * 0.006 + i));
+                        ctx.save();
+                        ctx.translate(e.x, e.y);
+                        ctx.beginPath();
+                        ctx.moveTo(0, pulseSize * 0.25);
+                        ctx.bezierCurveTo(-pulseSize*0.4, -pulseSize*0.3, -pulseSize*0.8, pulseSize*0.2, 0, pulseSize*0.8);
+                        ctx.bezierCurveTo(pulseSize*0.8, pulseSize*0.2, pulseSize*0.4, -pulseSize*0.3, 0, pulseSize*0.25);
+                        ctx.closePath();
+                        let gradient = ctx.createLinearGradient(-pulseSize*0.4, -pulseSize*0.2, pulseSize*0.4, pulseSize*0.5);
+                        gradient.addColorStop(0, `rgba(255, 130, 170, ${e.opacity})`);
+                        gradient.addColorStop(1, `rgba(230, 70, 120, ${e.opacity})`);
+                        ctx.fillStyle = gradient;
+                        ctx.shadowColor = 'rgba(210, 40, 100, 0.8)';
+                        ctx.shadowBlur = 18;
+                        ctx.shadowOffsetY = 2;
+                        ctx.fill();
+                        ctx.restore();
+                    } else {
+                        ctx.save();
+                        ctx.translate(e.x, e.y);
+                        ctx.rotate(Math.sin(Date.now() * 0.003 + i) * 0.1);
+                        ctx.beginPath();
+                        ctx.moveTo(0, -e.size*0.2);
+                        ctx.quadraticCurveTo(-e.size*0.6, -e.size*0.8, -e.size*0.2, -e.size*1.1);
+                        ctx.quadraticCurveTo(0, -e.size*1.2, e.size*0.2, -e.size*1.1);
+                        ctx.quadraticCurveTo(e.size*0.6, -e.size*0.8, 0, -e.size*0.2);
+                        ctx.fillStyle = e.color1;
+                        ctx.shadowColor = 'rgba(230, 100, 150, 0.9)';
+                        ctx.shadowBlur = 16;
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.moveTo(0, e.size*0.2);
+                        ctx.quadraticCurveTo(-e.size*0.6, e.size*0.8, -e.size*0.2, e.size*1.1);
+                        ctx.quadraticCurveTo(0, e.size*1.2, e.size*0.2, e.size*1.1);
+                        ctx.quadraticCurveTo(e.size*0.6, e.size*0.8, 0, e.size*0.2);
+                        ctx.fillStyle = e.color2;
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+                requestAnimationFrame(drawElements);
+            }
+
+            window.addEventListener('resize', () => {
+                initCanvas();
+            });
+
+            initCanvas();
+            initElements();
+            drawElements();
+
+            // ------------------- TYPEWRITER EFFECT --------------------
+            const fullMessage = "My Bhausha, my butterfly, you color my world with joy. Every day with you is a beautiful adventure. I love you endlessly. 🦋💕";
+            const typewriterDiv = document.getElementById('typewriter-text');
+            let i = 0;
+            const speed = 65;
+
+            function typeWriter() {
+                if (i < fullMessage.length) {
+                    typewriterDiv.innerHTML = fullMessage.substring(0, i + 1) + '<span class="cursor"> </span>';
+                    i++;
+                    setTimeout(typeWriter, speed);
+                } else {
+                    typewriterDiv.innerHTML = fullMessage + '<span class="cursor"> </span>';
+                }
+            }
+            window.addEventListener('load', function() {
+                setTimeout(typeWriter, 700);
+            });
+
+            // ------------------- 3-CLICK PRANK + CAROUSEL + SOULFUL MUSIC --------------------
+            let clickCount = 0;
+            const surpriseBtn = document.getElementById('surpriseBtn');
+            const popup = document.getElementById('popupOverlay');
+            const popupTitle = document.getElementById('popupTitle');
+            const popupMessage = document.getElementById('popupMessage');
+            const butterflyContainer = document.getElementById('butterflyContainer');
+            const carouselWrapper = document.getElementById('carouselWrapper');
+            const carouselImage = document.getElementById('carouselImage');
+            const carouselCaption = document.getElementById('carouselCaption');
+            const closePopup = document.getElementById('closePopup');
+            
+            const soulfulAudio = document.getElementById('soulfulMusic');
+            soulfulAudio.volume = 0.4;
+
+            // Romantic images from local assets
+            const images = [
+                { src: 'assets/images/Img1.jpg', caption: 'our hearts' },
+                { src: 'assets/images/Img2.jpg', caption: 'eternal love' },
+                { src: 'assets/images/Img3.jpg', caption: 'butterfly kiss' },
+                { src: 'assets/images/Img4.jpg', caption: 'flowers for you' },
+                { src: 'assets/images/Img5.jpg', caption: 'beach paradise' },
+                { src: 'assets/images/Img1.jpg', caption: 'magical moments' }
+            ];
+
+            let currentIndex = 0;
+            let carouselInterval = null;
+
+            function startCarousel() {
+                if (carouselInterval) clearInterval(carouselInterval);
+                if (images.length > 0) {
+                    carouselImage.src = images[0].src;
+                    carouselCaption.textContent = images[0].caption;
+                }
+                carouselInterval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    carouselImage.style.opacity = '0.7';
+                    setTimeout(() => {
+                        carouselImage.src = images[currentIndex].src;
+                        carouselCaption.textContent = images[currentIndex].caption;
+                        carouselImage.style.opacity = '1';
+                    }, 150);
+                }, 3000);
+            }
+
+            function stopCarousel() {
+                if (carouselInterval) {
+                    clearInterval(carouselInterval);
+                    carouselInterval = null;
+                }
+            }
+
+            function showPopup(title, msg, showButterflies, showCarousel = false) {
+                popupTitle.textContent = title;
+                popupMessage.textContent = msg;
+                if (showButterflies) {
+                    butterflyContainer.innerHTML = '<span class="butterfly-symbol">🦋</span><span class="butterfly-symbol">🦋</span><span class="butterfly-symbol">🦋</span>';
+                } else {
+                    butterflyContainer.innerHTML = '';
+                }
+                if (showCarousel) {
+                    carouselWrapper.style.display = 'block';
+                    startCarousel();
+                } else {
+                    carouselWrapper.style.display = 'none';
+                    stopCarousel();
+                }
+                popup.classList.add('show');
+            }
+
+            surpriseBtn.addEventListener('click', function() {
+                clickCount++;
+                if (clickCount === 1) {
+                    showPopup('😄 gotcha!', 'You tried to kiss a butterfly... but it turned into a tiny potato! 🥔', false);
+                    soulfulAudio.pause();
+                    soulfulAudio.currentTime = 0;
+                } else if (clickCount === 2) {
+                    showPopup('🤪 not yet!', 'You found a dancing cactus in a tutu! 🌵🩰', false);
+                    soulfulAudio.pause();
+                    soulfulAudio.currentTime = 0;
+                } else if (clickCount === 3) {
+                    showPopup('🦋 for my butterfly 🦋', 'Bhausha, you are the most magical part of my life. I love you endlessly.', true, true);
+                    soulfulAudio.play().catch(e => console.log('soulful audio play prevented'));
+                    clickCount = 0;
+                }
+            });
+
+            closePopup.addEventListener('click', function() {
+                popup.classList.remove('show');
+                stopCarousel();
+                soulfulAudio.pause();
+                soulfulAudio.currentTime = 0;
+            });
+
+            popup.addEventListener('click', function(e) {
+                if (e.target === popup) {
+                    popup.classList.remove('show');
+                    stopCarousel();
+                    soulfulAudio.pause();
+                    soulfulAudio.currentTime = 0;
+                }
+            });
+
+            // ------------------- BEACH SURPRISE WITH INTELLIGENT AUDIO PAUSE/RESUME --------------------
+            let nameClickCount = 0;
+            const nameTrigger = document.getElementById('nameTrigger');
+            const beachPopup = document.getElementById('beachPopup');
+            const closeBeach = document.getElementById('closeBeachPopup');
+            const waveAudio = document.getElementById('waveSound');
+            const bgAudio = document.getElementById('bgMusic');
+            
+            waveAudio.volume = 0.2;
+            
+            // Store previous states
+            let bgWasPlaying = false;
+            let soulfulWasPlaying = false;
+
+            nameTrigger.addEventListener('click', function() {
+                nameClickCount++;
+                if (nameClickCount === 3) {
+                    // Pause other music and remember their states
+                    bgWasPlaying = !bgAudio.paused;
+                    soulfulWasPlaying = !soulfulAudio.paused;
+                    
+                    if (!bgAudio.paused) bgAudio.pause();
+                    if (!soulfulAudio.paused) soulfulAudio.pause();
+                    
+                    // Play wave sound
+                    waveAudio.play().catch(e => console.log('wave sound play prevented'));
+                    
+                    beachPopup.classList.add('show');
+                    nameClickCount = 0;
+                }
+            });
+
+            function resumeOtherAudio() {
+                if (bgWasPlaying) {
+                    bgAudio.play().catch(e => {});
+                }
+                if (soulfulWasPlaying) {
+                    soulfulAudio.play().catch(e => {});
+                }
+            }
+
+            closeBeach.addEventListener('click', function() {
+                beachPopup.classList.remove('show');
+                waveAudio.pause();
+                waveAudio.currentTime = 0;
+                resumeOtherAudio();
+            });
+
+            beachPopup.addEventListener('click', function(e) {
+                if (e.target === beachPopup) {
+                    beachPopup.classList.remove('show');
+                    waveAudio.pause();
+                    waveAudio.currentTime = 0;
+                    resumeOtherAudio();
+                }
+            });
+
+            // ------------------- BACKGROUND MUSIC --------------------
+            bgAudio.volume = 0.25;
+
+            function enableAudio() {
+                bgAudio.play().catch(e => console.log("bg audio needs interaction"));
+            }
+
+            document.body.addEventListener('click', function once() {
+                bgAudio.play().then(() => {}).catch(() => {});
+                document.body.removeEventListener('click', once);
+            }, { once: true });
+
+            enableAudio();
+
+            const audioWidget = document.getElementById('romantic-audio');
+            audioWidget.addEventListener('click', (e) => {
+                if (bgAudio.paused) {
+                    bgAudio.play();
+                } else {
+                    bgAudio.pause();
+                }
+                e.stopPropagation();
+            });
+
+            // personalize name
+            let nameSpan = document.getElementById('nameTrigger');
+            if (nameSpan) {
+                nameSpan.innerText = 'Your Name';
+            }
+
+        })();
+    </script>
+    <!-- set your actual name here -->
+    <script>
+        (function setYourName() {
+            document.getElementById('nameTrigger').innerText = 'Your Name'; // <-- replace with your name, e.g., "Raj"
+        })();
+    </script>
+</body>
+</html>
