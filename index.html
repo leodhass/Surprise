@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Bhausha · butterfly of my heart</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
             justify-content: center;
             position: relative;
             overflow-x: hidden;
-            padding: 16px;
+            padding: 12px;
         }
 
         /* floating canvas for hearts and butterflies */
@@ -39,20 +39,21 @@
             z-index: 5;
         }
 
-        /* main card */
+        /* main card - enhanced mobile responsiveness */
         .valentine-card {
             position: relative;
             z-index: 15;
             max-width: 900px;
             width: 100%;
-            background: rgba(255, 240, 248, 0.25);
+            background: rgba(255, 240, 248, 0.3);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-            border-radius: 80px 30px 80px 30px;
+            border-radius: min(70px, 10vw) min(20px, 4vw) min(70px, 10vw) min(20px, 4vw);
             box-shadow: 0 45px 80px rgba(150, 30, 70, 0.4), 0 0 0 4px rgba(255, 240, 250, 0.8) inset, 0 0 60px #ffb3c6;
-            padding: 40px 25px 50px 25px;
+            padding: clamp(25px, 6vw, 50px) clamp(15px, 4vw, 30px);
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.9);
+            margin: 10px auto;
         }
 
         .elegant {
@@ -64,32 +65,34 @@
         }
 
         h1 {
-            font-size: clamp(3.5rem, 14vw, 5.5rem);
+            font-size: clamp(3rem, 15vw, 5.5rem);
             margin-bottom: 5px;
             line-height: 1.1;
             color: #991f47;
             filter: drop-shadow(0 8px 16px #ff9eb8);
+            word-break: break-word;
         }
 
         .sub {
             font-family: 'Parisienne', cursive;
-            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            font-size: clamp(1.6rem, 6vw, 2.6rem);
             color: #b32150;
             opacity: 0.98;
             margin-bottom: 15px;
             background: rgba(255, 255, 255, 0.3);
-            padding: 6px 25px;
+            padding: 6px 20px;
             border-radius: 60px;
             display: inline-block;
             backdrop-filter: blur(6px);
             border: 2px solid white;
             box-shadow: 0 5px 15px #ffb8c9;
+            max-width: 90%;
         }
 
         /* typewriter container */
         .typewriter-container {
-            min-height: 150px;
-            margin: 20px 5px 20px 5px;
+            min-height: clamp(120px, 20vw, 170px);
+            margin: 15px 0 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -97,12 +100,12 @@
 
         .typewriter-message {
             font-family: 'Parisienne', cursive;
-            font-size: clamp(1.9rem, 6vw, 2.8rem);
+            font-size: clamp(1.5rem, 5vw, 2.8rem);
             font-weight: 500;
             color: #3b1020;
             background: rgba(255, 240, 250, 0.5);
-            padding: 22px 25px;
-            border-radius: 90px 25px 90px 25px;
+            padding: clamp(15px, 4vw, 25px);
+            border-radius: min(60px, 8vw) min(20px, 4vw) min(60px, 8vw) min(20px, 4vw);
             line-height: 1.4;
             max-width: 800px;
             box-shadow: 0 20px 35px rgba(180, 60, 90, 0.3), 0 0 0 4px #ffeef4;
@@ -111,6 +114,7 @@
             word-break: break-word;
             text-shadow: 2px 2px 10px #ffdae7;
             border: 2px solid white;
+            width: 100%;
         }
 
         .cursor {
@@ -129,25 +133,29 @@
             50% { opacity: 0; }
         }
 
-        /* surprise button */
+        /* surprise button - mobile friendly */
         .surprise-btn {
             background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 3px solid white;
-            padding: 16px 50px;
+            padding: clamp(12px, 4vw, 20px) clamp(30px, 8vw, 60px);
             border-radius: 70px;
             font-family: 'Great Vibes', cursive;
-            font-size: 2.2rem;
+            font-size: clamp(1.8rem, 6vw, 2.4rem);
             font-weight: 500;
             color: #711c3d;
             text-shadow: 0 3px 10px #ffc0d0, 0 0 20px white;
             cursor: pointer;
             transition: 0.2s ease;
-            margin: 15px 0 15px;
+            margin: 15px 0;
             letter-spacing: 1.5px;
             box-shadow: 0 20px 30px -5px #a53860, 0 4px 0 0 #751f3b;
             transform: translateY(0);
+            width: auto;
+            max-width: 90%;
+            white-space: normal;
+            word-break: break-word;
         }
 
         .surprise-btn:hover {
@@ -161,28 +169,29 @@
             box-shadow: 0 15px 20px -5px #a53860, 0 2px 0 0 #751f3b;
         }
 
-        /* signature with clickable name */
+        /* signature */
         .signature {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.2rem;
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
             color: #741f40;
             margin-top: 20px;
             opacity: 0.95;
             text-align: right;
-            padding-right: 20px;
+            padding-right: 10px;
             text-shadow: 0 0 20px white;
         }
         .signature .clickable-name {
             cursor: pointer;
             border-bottom: 2px dashed #ff88aa;
             transition: 0.2s;
+            display: inline-block;
         }
         .signature .clickable-name:hover {
             color: #a52a55;
             border-bottom: 2px solid #ffb0c0;
         }
 
-        /* popup overlay base */
+        /* popup overlay - mobile optimized */
         .popup-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -196,23 +205,24 @@
             visibility: hidden;
             opacity: 0;
             transition: opacity 0.4s ease, visibility 0.4s;
-            padding: 20px;
+            padding: 15px;
         }
 
         .popup-card {
             background: linear-gradient(145deg, #fff6f9, #ffdde8);
             max-width: 850px;
-            width: 95%;
-            padding: 30px 20px;
-            border-radius: 100px 20px 100px 20px;
-            box-shadow: 0 50px 80px #8f3857, 0 0 0 10px #ffc0d0, 0 0 60px #ff99b5;
+            width: 100%;
+            max-height: 90vh;
+            padding: clamp(20px, 5vw, 35px) clamp(15px, 4vw, 25px);
+            border-radius: min(80px, 10vw) min(20px, 4vw) min(80px, 10vw) min(20px, 4vw);
+            box-shadow: 0 50px 80px #8f3857, 0 0 0 clamp(6px, 2vw, 10px) #ffc0d0, 0 0 60px #ff99b5;
             text-align: center;
             font-family: 'Great Vibes', cursive;
             transform: scale(0.8);
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             border: 6px solid white;
-            max-height: 90vh;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .popup-overlay.show {
@@ -225,23 +235,25 @@
         }
 
         .popup-card h2 {
-            font-size: 3rem;
+            font-size: clamp(2.2rem, 7vw, 3.2rem);
             color: #a1244b;
             margin-bottom: 10px;
             text-shadow: 4px 4px 0 #ffccda;
+            word-break: break-word;
         }
 
         .popup-message {
-            font-size: 2.2rem;
+            font-size: clamp(1.5rem, 5vw, 2.4rem);
             line-height: 1.4;
             color: #641c38;
             margin: 10px 0 15px;
             font-family: 'Parisienne', cursive;
+            word-break: break-word;
         }
 
         .butterfly-symbol {
             display: inline-block;
-            font-size: 3.2rem;
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
             animation: floatButterfly 3s infinite ease-in-out;
             filter: drop-shadow(0 8px 12px #ff7c9e);
             margin: 0 5px;
@@ -254,14 +266,14 @@
             100% { transform: translateY(0) rotate(0deg); }
         }
 
-        /* lovely framed carousel */
+        /* lovely framed carousel - mobile responsive */
         .carousel-container {
             position: relative;
             width: 100%;
             max-width: 500px;
             margin: 15px auto;
-            border-radius: 40px 15px 40px 15px;
-            padding: 12px;
+            border-radius: min(40px, 6vw) min(15px, 3vw) min(40px, 6vw) min(15px, 3vw);
+            padding: clamp(8px, 2vw, 12px);
             background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(8px);
             box-shadow: 0 0 0 6px #ffb6c9, 0 20px 30px #b34d71;
@@ -271,7 +283,7 @@
         .carousel-frame {
             width: 100%;
             aspect-ratio: 16/9;
-            border-radius: 30px 10px 30px 10px;
+            border-radius: min(30px, 5vw) min(10px, 2vw) min(30px, 5vw) min(10px, 2vw);
             overflow: hidden;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
         }
@@ -282,26 +294,52 @@
             object-fit: cover;
             display: block;
             transition: opacity 0.8s ease;
-            border-radius: 30px 10px 30px 10px;
+            border-radius: min(30px, 5vw) min(10px, 2vw) min(30px, 5vw) min(10px, 2vw);
             border: 3px solid white;
         }
 
         .carousel-caption {
             font-family: 'Quicksand', sans-serif;
             margin-top: 8px;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
             color: #90284b;
             font-weight: 600;
             letter-spacing: 1px;
+        }
+
+        /* new surprise elements */
+        .mini-surprise {
+            margin: 15px 0 5px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .surprise-icon {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50px;
+            border: 2px solid white;
+            backdrop-filter: blur(4px);
+        }
+        .surprise-icon:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.6);
+        }
+        .surprise-icon:active {
+            transform: scale(0.95);
         }
 
         .close-popup {
             background: #ff8da9;
             border: none;
             font-family: 'Quicksand', sans-serif;
-            padding: 12px 40px;
+            padding: clamp(10px, 3vw, 14px) clamp(30px, 8vw, 45px);
             border-radius: 60px;
-            font-size: 1.5rem;
+            font-size: clamp(1.3rem, 4vw, 1.6rem);
             font-weight: 600;
             color: white;
             box-shadow: 0 6px 0 #b63b62;
@@ -310,6 +348,8 @@
             border: 3px solid white;
             letter-spacing: 1px;
             margin-top: 15px;
+            width: auto;
+            display: inline-block;
         }
 
         .close-popup:active {
@@ -317,34 +357,14 @@
             box-shadow: 0 1px 0 #b63b62;
         }
 
-        @media (max-width: 600px) {
-            .valentine-card {
-                padding: 30px 15px 40px 15px;
-            }
-            .typewriter-message {
-                padding: 18px 18px;
-                font-size: 2rem;
-            }
-            .surprise-btn {
-                font-size: 2rem;
-                padding: 14px 35px;
-            }
-            .popup-card h2 {
-                font-size: 2.5rem;
-            }
-            .popup-message {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* audio widgets */
+        /* audio widgets - mobile friendly */
         #romantic-audio {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             width: 45px;
             height: 45px;
-            opacity: 0.5;
+            opacity: 0.6;
             z-index: 200;
             border-radius: 50%;
             background: #ffb8c9;
@@ -364,9 +384,9 @@
         }
         .audio-note {
             position: fixed;
-            bottom: 70px;
-            right: 20px;
-            background: rgba(255, 230, 240, 0.8);
+            bottom: 65px;
+            right: 15px;
+            background: rgba(255, 230, 240, 0.9);
             font-size: 0.7rem;
             padding: 4px 10px;
             border-radius: 40px;
@@ -374,6 +394,18 @@
             backdrop-filter: blur(4px);
             z-index: 210;
             border: 1px solid white;
+            white-space: nowrap;
+        }
+
+        /* extra small devices */
+        @media (max-width: 380px) {
+            .surprise-btn {
+                font-size: 1.5rem;
+                padding: 12px 25px;
+            }
+            .popup-card h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -383,18 +415,25 @@
 
     <div class="valentine-card">
         <h1 class="elegant">Bhausha</h1>
-        <div class="sub">my beautiful butterfly</div>
+        <div class="sub">my beautiful girl</div>
 
         <div class="typewriter-container">
             <div id="typewriter-text" class="typewriter-message"></div>
         </div>
 
         <!-- surprise button (3-click prank) -->
-        <button class="surprise-btn" id="surpriseBtn">🦋 Open when you miss me</button>
+        <button class="surprise-btn" id="surpriseBtn">Open when you miss me</button>
 
-        <!-- signature with clickable name (beach surprise after 3 clicks) -->
+        <!-- additional mini surprises (more fun) -->
+        <div class="mini-surprise">
+            <span class="surprise-icon" id="kissSurprise">💋</span>
+            <span class="surprise-icon" id="heartSurprise">💝</span>
+            <span class="surprise-icon" id="starSurprise">✨</span>
+        </div>
+
+        <!-- signature with clickable name -->
         <div class="signature">
-            yours always, <span class="clickable-name" id="nameTrigger">[Your Name]</span>
+            yours always, <span class="clickable-name" id="nameTrigger">Abhi</span>
         </div>
     </div>
 
@@ -405,7 +444,7 @@
             <div class="popup-message" id="popupMessage"></div>
             <div id="butterflyContainer" style="margin:10px 0;"></div>
             
-            <!-- lovely framed carousel (hidden by default) -->
+            <!-- lovely framed carousel -->
             <div id="carouselWrapper" style="display: none;" class="carousel-container">
                 <div class="carousel-frame">
                     <img id="carouselImage" class="carousel-slide" src="" alt="romantic moment">
@@ -417,40 +456,71 @@
         </div>
     </div>
 
-    <!-- beach popup with wave sound -->
+    <!-- beach popup -->
     <div class="popup-overlay" id="beachPopup">
         <div class="popup-card" style="background: #ffeef2;">
             <h2>🏖️ tonight's secret 🏖️</h2>
-            <div class="popup-message" style="font-size: 2.2rem;">
+            <div class="popup-message" style="font-size: clamp(1.5rem, 5vw, 2.2rem);">
                 Get ready my love, we're going to the beach!<br>
                 🌙🌊 Under the stars, just you and me.<br>
                 I can't wait to hold your hand by the shore.
             </div>
-            <div style="font-size: 3.5rem; margin: 10px 0;">🌴🐚🌅</div>
+            <div style="font-size: clamp(2.5rem, 8vw, 3.5rem); margin: 10px 0;">🌴🐚🌅</div>
             <button class="close-popup" id="closeBeachPopup">💖 close 💖</button>
         </div>
     </div>
 
-    <!-- background music (general romantic) - local file -->
-    <div class="audio-note">🎵Love</div>
+    <!-- new surprise popups -->
+    <div class="popup-overlay" id="kissPopup">
+        <div class="popup-card" style="background: #fff0f5;">
+            <h2>💋 butterfly kiss 💋</h2>
+            <div class="popup-message" style="font-size: clamp(1.6rem, 5vw, 2.2rem);">
+                A thousand butterfly kisses<br>for my beautiful Bhausha.<br>You make my heart flutter.
+            </div>
+            <div style="font-size: 3rem;">🦋💕🦋</div>
+            <button class="close-popup" id="closeKissPopup">💖 close 💖</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="heartPopup">
+        <div class="popup-card" style="background: #ffe4e9;">
+            <h2>💝 heart of gold 💝</h2>
+            <div class="popup-message" style="font-size: clamp(1.6rem, 5vw, 2.2rem);">
+                Your heart is the most precious gift.<br>I'll treasure it forever, my love.
+            </div>
+            <div style="font-size: 3rem;">🌟💖🌟</div>
+            <button class="close-popup" id="closeHeartPopup">💖 close 💖</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="starPopup">
+        <div class="popup-card" style="background: #f0e6ff;">
+            <h2>✨ starry wishes ✨</h2>
+            <div class="popup-message" style="font-size: clamp(1.6rem, 5vw, 2.2rem);">
+                Every star in the sky<br>whispers your name, Bhausha.<br>You are my universe.
+            </div>
+            <div style="font-size: 3rem;">⭐🌙⭐</div>
+            <button class="close-popup" id="closeStarPopup">💖 close 💖</button>
+        </div>
+    </div>
+
+    <!-- audio files from assets/audio/ -->
+    <div class="audio-note">🎵</div>
     <div id="romantic-audio" title="play/pause background music">
         <audio id="bgMusic" loop autoplay>
-            <source src="assets/audio/romantic-bg.mp3" type="audio/mpeg">
-            <!-- fallback in case file missing -->
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            <source src="Assets/music/romantic-bg.mp3" type="audio/mpeg">
+            <source src="Assets/music/romantic-bg.mp3" type="audio/mpeg">
         </audio>
     </div>
 
-    <!-- soulful music for 3rd surprise - local file -->
     <audio id="soulfulMusic" loop preload="auto">
-        <source src="assets/audio/soulful.mp3" type="audio/mpeg">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
+        <source src="Assets/music/soulful.mp3" type="audio/mpeg">
+        <source src="Assets/music/soulful.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- beach wave sound effect - local file -->
     <audio id="waveSound" loop preload="auto">
-        <source src="assets/audio/waves.mp3" type="audio/mpeg">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg">
+        <source src="Assets/music/waves.mp3" type="audio/mpeg">
+        <source src="Assets/music/waves.mp3" type="audio/mpeg">
     </audio>
 
     <script>
@@ -607,13 +677,13 @@
             const soulfulAudio = document.getElementById('soulfulMusic');
             soulfulAudio.volume = 0.4;
 
-            // Romantic images from local assets
+            // Romantic images from assets/images/
             const images = [
-                { src: 'Assets/images/Img1.jpg', caption: 'our hearts' },
+				{ src: 'Assets/images/Img1.jpg', caption: 'flowers for you' },
                 { src: 'Assets/images/Img2.jpg', caption: 'eternal love' },
-                { src: 'Assets/images/Img3.jpg', caption: 'butterfly kiss' },
-                { src: 'Assets/images/Img4.jpg', caption: 'flowers for you' },
-                { src: 'Assets/images/Img5.jpg', caption: 'beach paradise' },
+                { src: 'Assets/images/Img3.jpg', caption: 'magical moments' },
+                { src: 'Assets/images/Img4.jpg', caption: 'together' },
+                { src: 'Assets/images/Img5.jpg', caption: 'paradise' },
                 { src: 'Assets/images/Img1.jpg', caption: 'magical moments' }
             ];
 
@@ -648,7 +718,7 @@
                 popupTitle.textContent = title;
                 popupMessage.textContent = msg;
                 if (showButterflies) {
-                    butterflyContainer.innerHTML = '<span class="butterfly-symbol">🦋</span><span class="butterfly-symbol">🦋</span><span class="butterfly-symbol">🦋</span>';
+                    butterflyContainer.innerHTML = '';
                 } else {
                     butterflyContainer.innerHTML = '';
                 }
@@ -665,15 +735,15 @@
             surpriseBtn.addEventListener('click', function() {
                 clickCount++;
                 if (clickCount === 1) {
-                    showPopup('😄 gotcha!', 'You tried to kiss a butterfly... but it turned into a tiny potato! 🥔', false);
+                    showPopup('😄 gotcha!', 'You clicked for a kiss... but I gave you a fish! 🐠', false);
                     soulfulAudio.pause();
                     soulfulAudio.currentTime = 0;
                 } else if (clickCount === 2) {
-                    showPopup('🤪 not yet!', 'You found a dancing cactus in a tutu! 🌵🩰', false);
+                    showPopup('🤪 not yet!', 'Are you expecting a Surprise! Fahhhhh 🌵', false);
                     soulfulAudio.pause();
                     soulfulAudio.currentTime = 0;
                 } else if (clickCount === 3) {
-                    showPopup('🦋 for my butterfly 🦋', 'Bhausha, you are the most magical part of my life. I love you endlessly.', true, true);
+                    showPopup('For my butterfly ', 'Bhausha, you are the most magical part of my life. I love you endlessly.', true, true);
                     soulfulAudio.play().catch(e => console.log('soulful audio play prevented'));
                     clickCount = 0;
                 }
@@ -695,7 +765,7 @@
                 }
             });
 
-            // ------------------- BEACH SURPRISE WITH INTELLIGENT AUDIO PAUSE/RESUME --------------------
+            // ------------------- BEACH SURPRISE WITH AUDIO MANAGEMENT --------------------
             let nameClickCount = 0;
             const nameTrigger = document.getElementById('nameTrigger');
             const beachPopup = document.getElementById('beachPopup');
@@ -705,26 +775,23 @@
             
             waveAudio.volume = 0.2;
             
-            // Store previous states
             let bgWasPlaying = false;
             let soulfulWasPlaying = false;
 
             nameTrigger.addEventListener('click', function() {
                 nameClickCount++;
                 if (nameClickCount === 3) {
-                    // Pause other music and remember their states
                     bgWasPlaying = !bgAudio.paused;
                     soulfulWasPlaying = !soulfulAudio.paused;
                     
                     if (!bgAudio.paused) bgAudio.pause();
                     if (!soulfulAudio.paused) soulfulAudio.pause();
                     
-                    // Play wave sound
                     waveAudio.play().catch(e => console.log('wave sound play prevented'));
                     
                     beachPopup.classList.add('show');
                     nameClickCount = 0;
-                }
+                }	
             });
 
             function resumeOtherAudio() {
@@ -750,6 +817,35 @@
                     waveAudio.currentTime = 0;
                     resumeOtherAudio();
                 }
+            });
+
+            // ------------------- NEW MINI SURPRISES --------------------
+            const kissPopup = document.getElementById('kissPopup');
+            const heartPopup = document.getElementById('heartPopup');
+            const starPopup = document.getElementById('starPopup');
+            
+            const closeKiss = document.getElementById('closeKissPopup');
+            const closeHeart = document.getElementById('closeHeartPopup');
+            const closeStar = document.getElementById('closeStarPopup');
+
+            document.getElementById('kissSurprise').addEventListener('click', () => {
+                kissPopup.classList.add('show');
+            });
+            document.getElementById('heartSurprise').addEventListener('click', () => {
+                heartPopup.classList.add('show');
+            });
+            document.getElementById('starSurprise').addEventListener('click', () => {
+                starPopup.classList.add('show');
+            });
+
+            closeKiss.addEventListener('click', () => kissPopup.classList.remove('show'));
+            closeHeart.addEventListener('click', () => heartPopup.classList.remove('show'));
+            closeStar.addEventListener('click', () => starPopup.classList.remove('show'));
+
+            [kissPopup, heartPopup, starPopup].forEach(p => {
+                p.addEventListener('click', (e) => {
+                    if (e.target === p) p.classList.remove('show');
+                });
             });
 
             // ------------------- BACKGROUND MUSIC --------------------
@@ -787,7 +883,7 @@
     <!-- set your actual name here -->
     <script>
         (function setYourName() {
-            document.getElementById('nameTrigger').innerText = 'Abhi'; // <-- replace with your name, e.g., "Raj"
+            document.getElementById('nameTrigger').innerText = 'Abhi'; // <-- replace with your name
         })();
     </script>
 </body>
